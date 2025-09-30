@@ -1,0 +1,100 @@
+package vn.org.bvpkh.bvpkh_gov.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import vn.org.bvpkh.bvpkh_gov.security.AuthenticationFilter;
+import vn.org.bvpkh.bvpkh_gov.security.SecurityEntryPoint;
+import vn.org.bvpkh.bvpkh_gov.services.IUserPrincipleService;
+import vn.org.bvpkh.bvpkh_gov.utilities.UserPrincipleService;
+
+@Configuration
+@EnableWebSecurity
+@ComponentScan(basePackageClasses = {
+        SecurityEntryPoint.class,
+        UserPrincipleService.class})
+@RequiredArgsConstructor
+public class SecurityConfiguration {
+    private final IUserPrincipleService userPrincipalService;
+    private final SecurityEntryPoint securityEntryPoint;
+    private final AuthenticationFilter authenticationFilter;
+
+    @Autowired
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userPrincipalService)
+                .passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class).build();
+    }
+
+    @Bean
+    protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        httpSecurity.cors(AbstractHttpConfigurer::disable);
+
+        httpSecurity
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        httpSecurity.authorizeHttpRequests(
+                req -> req.requestMatchers(
+//                                "/api/register",
+//                                "/api/addresses",
+//                                "/api/addresses/**",
+//                                "/api/vehicle-coordinations",
+//                                "/api/vehicle-coordinations/**",
+//                                "/api/banking-accounts",
+//                                "/api/banking-accounts/**",
+//                                "/api/branches",
+//                                "/api/branches/**",
+//                                "/api/companies",
+//                                "/api/companies/**",
+//                                "/api/customers",
+//                                "/api/customers/**",
+//                                "/api/departments",
+//                                "/api/departments/**",
+//                                "/api/drivers",
+//                                "/api/drivers/**",
+//                                "/api/shipping-orders",
+//                                "/api/shipping-orders/**",
+//                                "/api/transportation-vehicles",
+//                                "/api/transportation-vehicles/**",
+//                                "/api/employees",
+//                                "/api/employees/**",
+//                                "/api/job-cost-items",
+//                                "/api/job-cost-items/**",
+                                "/api/user",
+                                "/api/login",
+                                "/api/logout")
+                        .permitAll());
+        httpSecurity.exceptionHandling(
+                exception -> exception.authenticationEntryPoint(securityEntryPoint));
+
+        httpSecurity.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        httpSecurity.rememberMe(req -> req.tokenRepository(new InMemoryTokenRepositoryImpl()));
+
+        return httpSecurity.build();
+    }
+
+}
