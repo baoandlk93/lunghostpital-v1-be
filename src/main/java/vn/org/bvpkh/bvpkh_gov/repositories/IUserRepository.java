@@ -18,4 +18,10 @@ public interface IUserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u JOIN u.roles r WHERE r = :role")
     Page<User> findUsersByRole(@Param("role") Role role, Pageable pageable);
+
+    Page<User> findUsersByUsernameContains(String username, Pageable pageable);
+
+    Page<User> findAllByUsername(String username);
+
+
 }

@@ -16,21 +16,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
-import vn.org.bvpkh.bvpkh_gov.security.AuthenticationFilter;
-import vn.org.bvpkh.bvpkh_gov.security.SecurityEntryPoint;
+import vn.org.bvpkh.bvpkh_gov.security.jwt.JwtAuthFilter;
+import vn.org.bvpkh.bvpkh_gov.security.jwt.JwtAuthEntryPoint;
 import vn.org.bvpkh.bvpkh_gov.services.IUserPrincipleService;
-import vn.org.bvpkh.bvpkh_gov.utilities.UserPrincipleService;
+import vn.org.bvpkh.bvpkh_gov.services.impl.UserPrincipleService;
 
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackageClasses = {
-        SecurityEntryPoint.class,
+        JwtAuthEntryPoint.class,
         UserPrincipleService.class})
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final IUserPrincipleService userPrincipalService;
-    private final SecurityEntryPoint securityEntryPoint;
-    private final AuthenticationFilter authenticationFilter;
+    private final JwtAuthEntryPoint securityEntryPoint;
+    private final JwtAuthFilter authenticationFilter;
 
     @Autowired
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {

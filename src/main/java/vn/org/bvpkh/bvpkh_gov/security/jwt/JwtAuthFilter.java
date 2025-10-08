@@ -1,4 +1,4 @@
-package vn.org.bvpkh.bvpkh_gov.security;
+package vn.org.bvpkh.bvpkh_gov.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,9 +21,9 @@ import java.io.IOException;
 
 @Component
 @AllArgsConstructor
-public class AuthenticationFilter extends OncePerRequestFilter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
-    private final TokenProvider tokenProvider;
+public class JwtAuthFilter extends OncePerRequestFilter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthFilter.class);
+    private final JwtTokenProvider tokenProvider;
     private final IUserPrincipleService userPrincipalService;
 
     @Override

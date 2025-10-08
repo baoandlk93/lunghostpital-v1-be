@@ -1,4 +1,4 @@
-package vn.org.bvpkh.bvpkh_gov.utilities;
+package vn.org.bvpkh.bvpkh_gov.services.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

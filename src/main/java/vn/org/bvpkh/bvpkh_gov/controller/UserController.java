@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vn.org.bvpkh.bvpkh_gov.entities.users.User;
-import vn.org.bvpkh.bvpkh_gov.utilities.UserService;
+import vn.org.bvpkh.bvpkh_gov.services.IUserService;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-    private final UserService userService;
+    private final IUserService userService;
 
 
     @RequestMapping
     public ResponseEntity<Page<User>> findAll(@RequestParam(defaultValue = "") String name,
                                               @PageableDefault(size = 5) Pageable pageable) {
-        return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findByUsernameContaining(name, pageable), HttpStatus.OK);
     }
 
 }
