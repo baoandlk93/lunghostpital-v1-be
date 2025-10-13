@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import vn.org.bvpkh.bvpkh_gov.dtos.WarehouseDTO;
 import vn.org.bvpkh.bvpkh_gov.entities.management_equipment.Warehouse;
 import vn.org.bvpkh.bvpkh_gov.repositories.IWarehouseRepository;
 import vn.org.bvpkh.bvpkh_gov.services.IWarehouService;
@@ -25,8 +26,11 @@ public class WarehouseService implements IWarehouService {
     }
 
     @Override
-    public Warehouse save(Warehouse warehouse) {
-
+    public Warehouse save(WarehouseDTO warehouseDTO) {
+        Warehouse warehouse = new Warehouse();
+        warehouse.setName(warehouseDTO.getName());
+        warehouse.setDescription(warehouseDTO.getDescription());
+        warehouse.setId(warehouse.getId());
         return warehouseRepository.save(warehouse);
     }
 

@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class WarehouseDTO {
+public class DepartmentDTO {
     private String name;
-    private String id;
+    private Long id;
     private String description;
 }

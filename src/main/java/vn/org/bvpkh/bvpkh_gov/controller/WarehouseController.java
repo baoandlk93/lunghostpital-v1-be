@@ -3,8 +3,10 @@ package vn.org.bvpkh.bvpkh_gov.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import vn.org.bvpkh.bvpkh_gov.dtos.WarehouseDTO;
 import vn.org.bvpkh.bvpkh_gov.entities.management_equipment.Warehouse;
 import vn.org.bvpkh.bvpkh_gov.services.IWarehouService;
 
@@ -22,8 +24,8 @@ public class WarehouseController {
     }
 
     @PostMapping
-    public ResponseEntity<Warehouse> createWarehouse(@RequestBody Warehouse warehouse) {
-        Warehouse warehouse1 = warehouService.save(warehouse);
+    public ResponseEntity<Warehouse> createWarehouse(@RequestBody WarehouseDTO warehouseDTO) {
+        Warehouse warehouse1 = warehouService.save(warehouseDTO);
         return ResponseEntity.ok(warehouse1);
     }
 }

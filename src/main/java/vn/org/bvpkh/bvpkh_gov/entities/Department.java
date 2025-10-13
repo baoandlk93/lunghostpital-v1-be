@@ -20,6 +20,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
+    String description;
 
     @ManyToMany
     @JsonIgnore
