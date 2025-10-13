@@ -15,7 +15,7 @@ import vn.org.bvpkh.bvpkh_gov.services.IUserService;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private final IUserService userService;

@@ -58,34 +58,13 @@ public class SecurityConfiguration {
 
         httpSecurity.authorizeHttpRequests(
                 req -> req.requestMatchers(
-//                                "/api/register",
-//                                "/api/addresses",
-//                                "/api/addresses/**",
-//                                "/api/vehicle-coordinations",
-//                                "/api/vehicle-coordinations/**",
-//                                "/api/banking-accounts",
-//                                "/api/banking-accounts/**",
-//                                "/api/branches",
-//                                "/api/branches/**",
-//                                "/api/companies",
-//                                "/api/companies/**",
-//                                "/api/customers",
-//                                "/api/customers/**",
-//                                "/api/departments",
-//                                "/api/departments/**",
-//                                "/api/drivers",
-//                                "/api/drivers/**",
-//                                "/api/shipping-orders",
-//                                "/api/shipping-orders/**",
-//                                "/api/transportation-vehicles",
-//                                "/api/transportation-vehicles/**",
-//                                "/api/employees",
-//                                "/api/employees/**",
-//                                "/api/job-cost-items",
-//                                "/api/job-cost-items/**",
-                                "/api/user",
-                                "/api/login",
-                                "/api/logout")
+                                "/api/users",
+                                "/api/roles",
+                                "/api/departments",
+                                "/api/equipments",
+                                "/api/warehouses",
+                                "/api/auth/**"
+                                )
                         .permitAll());
         httpSecurity.exceptionHandling(
                 exception -> exception.authenticationEntryPoint(securityEntryPoint));
