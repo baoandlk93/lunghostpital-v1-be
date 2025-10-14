@@ -62,6 +62,7 @@ public class SecurityConfiguration {
                                 "/api/roles",
                                 "/api/departments",
                                 "/api/equipments",
+                                "/api/categories",
                                 "/api/warehouses",
                                 "/api/auth/**"
                                 )

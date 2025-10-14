@@ -10,6 +10,7 @@ public interface IEquipmentService {
     EquipmentDTO save(EquipmentDTO equipmentDTO);
     EquipmentDTO update(EquipmentDTO equipmentDTO);
     void delete(EquipmentDTO equipmentDTO);
-    Page<EquipmentDTO> search(EquipmentDTO equipmentDTO, Pageable pageable);
+    Page<EquipmentDTO> search(String keyword, Pageable pageable);
     EquipmentDTO findByName(String equipmentName);
+
 }

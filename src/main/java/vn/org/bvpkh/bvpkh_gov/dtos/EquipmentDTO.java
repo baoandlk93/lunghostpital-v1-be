@@ -4,14 +4,15 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import vn.org.bvpkh.bvpkh_gov.utilities.enums.EClassification;
 import vn.org.bvpkh.bvpkh_gov.utilities.enums.EStatus;
 import vn.org.bvpkh.bvpkh_gov.utilities.enums.EStatusOfUse;
+
+import java.io.Serializable;
 
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class EquipmentDTO {
+public class EquipmentDTO implements Serializable {
     private String deviceCode;
     private String name;
     private String model;
@@ -20,13 +21,13 @@ public class EquipmentDTO {
     private String assetSource;
     private String yearOfSupply;
     private Double price;
-    private EStatusOfUse statusOfUse;
-    private EStatus status;
+    private String statusOfUse;
+    private String status;
     private String timeIn;
     private String timeOut;
     private String timeUse;
     private int stock;
-    private EClassification classification;
+    private String classification;
     private String category;
     private String location;
     private String department;

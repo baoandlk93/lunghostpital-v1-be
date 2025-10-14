@@ -4,9 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
+
 @Data
 @Builder
-public class ResponseDto {
+public class ResponseDto implements Serializable {
     private String message;
     private Object data;
     private HttpStatus status;

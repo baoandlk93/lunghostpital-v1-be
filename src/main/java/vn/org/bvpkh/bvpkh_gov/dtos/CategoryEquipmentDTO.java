@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 @Data
 @Builder
-public class WarehouseDTO implements Serializable {
+public class CategoryEquipmentDTO implements Serializable {
     private String name;
-    private String id;
-    private String description;
+    private Long id;
+
 }

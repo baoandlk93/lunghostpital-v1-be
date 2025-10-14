@@ -28,7 +28,7 @@ public class EquipmentService implements IEquipmentService {
     }
 
     @Override
-    public Page<EquipmentDTO> search(EquipmentDTO equipmentDTO, Pageable pageable) {
+    public Page<EquipmentDTO> search(String keyword, Pageable pageable) {
         return null;
     }
 

@@ -3,12 +3,13 @@ package vn.org.bvpkh.bvpkh_gov.dtos;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder
-public class UserDTO {
+public class UserDTO implements Serializable {
     private String username;
     private String email;
     private List<String> roles;
