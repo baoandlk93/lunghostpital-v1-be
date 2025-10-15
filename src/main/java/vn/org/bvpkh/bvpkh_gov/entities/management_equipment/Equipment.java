@@ -12,6 +12,7 @@ import vn.org.bvpkh.bvpkh_gov.utilities.enums.EStatusOfUse;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -60,7 +61,7 @@ public class Equipment implements Serializable {
             joinColumns = @JoinColumn(name = "equipment_id"),
             inverseJoinColumns = @JoinColumn(name = "department_id")
     )
-    Set<Department> department;
+    Set<Department> department = new HashSet<>();
 
 
 }

@@ -7,4 +7,5 @@ import vn.org.bvpkh.bvpkh_gov.entities.management_equipment.EquipmentCategory;
 
 public interface IEquipmentCategoryRepository extends JpaRepository<EquipmentCategory,Long> {
     Page<EquipmentCategory> findAllByNameContains(String name, Pageable pageable);
+    EquipmentCategory findByName(String name);
 }
