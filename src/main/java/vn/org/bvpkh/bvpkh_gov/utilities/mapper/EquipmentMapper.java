@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class EquipmentMapper {
     public static EquipmentDTO toDTO(Equipment equipment) {
         return EquipmentDTO.builder()
+                .id(equipment.getId())
                 .deviceCode(equipment.getCode())
                 .name(equipment.getName())
                 .model(equipment.getModel())

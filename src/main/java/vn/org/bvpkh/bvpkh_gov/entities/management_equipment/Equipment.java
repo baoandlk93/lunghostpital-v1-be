@@ -41,8 +41,8 @@ public class Equipment implements Serializable {
     EStatus status;
     Date timeIn;
     Date timeOut;
-    Date timeUse;
     Date timeCheck;
+    String timeUse;
     Long stock;
     EClassification classification;
     @ManyToOne

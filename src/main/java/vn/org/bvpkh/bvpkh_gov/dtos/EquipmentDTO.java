@@ -4,8 +4,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-import vn.org.bvpkh.bvpkh_gov.utilities.enums.EStatus;
-import vn.org.bvpkh.bvpkh_gov.utilities.enums.EStatusOfUse;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +12,7 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EquipmentDTO implements Serializable {
+    private Long id;
     private String deviceCode;
     private String name;
     private String model;
@@ -26,8 +25,8 @@ public class EquipmentDTO implements Serializable {
     private String status;
     private Date timeIn;
     private Date timeOut;
-    private Date timeUse;
     private Date timeCheck;
+    private String timeUse;
     private Long stock;
     private String classification;
     private String category;

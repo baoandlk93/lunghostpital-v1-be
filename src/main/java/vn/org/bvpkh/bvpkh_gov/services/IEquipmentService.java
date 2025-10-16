@@ -9,7 +9,7 @@ public interface IEquipmentService {
 //    Thêm mới vật tư
     EquipmentDTO save(EquipmentDTO equipmentDTO);
     EquipmentDTO update(EquipmentDTO equipmentDTO);
-    void delete(EquipmentDTO equipmentDTO);
+    void delete(Long id );
     Page<EquipmentDTO> search(String keyword, Pageable pageable);
     EquipmentDTO findByName(String equipmentName);
 

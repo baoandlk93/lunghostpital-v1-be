@@ -26,4 +26,15 @@ public class EquipmentController {
     public ResponseEntity<EquipmentDTO> createEquipment(@RequestBody EquipmentDTO equipmentDTO) {
         return new ResponseEntity<>(equipmentService.save(equipmentDTO), HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<EquipmentDTO> updateEquipment(@RequestBody EquipmentDTO equipmentDTO) {
+        return new ResponseEntity<>(equipmentService.save(equipmentDTO), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeEquipment(@PathVariable Long id) {
+        equipmentService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

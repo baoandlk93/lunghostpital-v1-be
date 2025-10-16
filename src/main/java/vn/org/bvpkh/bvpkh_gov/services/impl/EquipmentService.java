@@ -95,8 +95,8 @@ public class EquipmentService implements IEquipmentService {
     }
 
     @Override
-    public void delete(EquipmentDTO equipmentDTO) {
-
+    public void delete(Long id) {
+        equipmentRepository.findById(id).ifPresent(equipmentRepository::delete);
     }
 
     @Override
