@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -69,12 +71,13 @@ public class UserService implements IUserService {
 
     @Override
     public ResponseDto registerUser(RegisterUserDTO registerUserDTO) {
-        Role roleSeller = roleRepository.findByName(registerUserDTO.getRole());
+        Role roleRepositoryByName = roleRepository.findByName(registerUserDTO.getRole());
         Set<Role> roleSet = new HashSet<>();
-        roleSet.add(roleSeller);
+        roleSet.add(roleRepositoryByName);
         String password = passwordEncoder.encode(registerUserDTO.getPassword());
         User user = User.builder()
                 .password(password)
+                .fullName(registerUserDTO.getFullName())
                 .username(registerUserDTO.getUsername())
                 .phoneNumber(registerUserDTO.getPhoneNumber())
                 .email(registerUserDTO.getEmail())
@@ -105,10 +108,13 @@ public class UserService implements IUserService {
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         loginUserDTO.getUsername(), loginUserDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        List<String> roles = Collections.singletonList(String.valueOf(SecurityContextHolder
+        List<String> roles = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
-                .getAuthorities()));
+                .getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority) // Lấy tên của từng quyền
+                .collect(Collectors.toList()); // Thu thập vào danh sách
         String token = jwtTokenProvider.generateToken(authentication);
         tokenCache.addToken(jwtTokenProvider.getUsernameFromJWT(token), token);
         return ResponseDto.builder()

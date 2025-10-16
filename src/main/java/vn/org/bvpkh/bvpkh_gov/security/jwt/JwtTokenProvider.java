@@ -1,6 +1,7 @@
 package vn.org.bvpkh.bvpkh_gov.security.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -9,18 +10,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
-
-    @Value("${app.jwtSecret}")
-    private String jwtSecret;
+    private final SecretKey jwtSecret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     @Value("${app.jwtExpirationInMs}")
-    private int jwtExpirationInMs;
+    private long jwtExpirationInMs;
 
     public String generateToken(Authentication authentication) {
         Date now = new Date();

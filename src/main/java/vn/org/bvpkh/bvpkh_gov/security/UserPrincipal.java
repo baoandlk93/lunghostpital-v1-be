@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
@@ -18,12 +19,12 @@ public class UserPrincipal implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public static UserPrincipal create(User user) {
-        String roleName = user.getUsername();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        if (Optional.ofNullable(roleName).isPresent()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(roleName);
-            grantedAuthorities.add(grantedAuthority);
-        }
+
+        user.getRoles().forEach(role ->
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()))
+        );
+
         return new UserPrincipal(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 

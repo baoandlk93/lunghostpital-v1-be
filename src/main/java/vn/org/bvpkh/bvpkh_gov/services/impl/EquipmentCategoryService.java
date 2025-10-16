@@ -57,6 +57,6 @@ public class EquipmentCategoryService implements IEquipmentCategoryService {
 
     @Override
     public void delete(EquipmentCategory equipmentCategory) {
-
+        
     }
 }
